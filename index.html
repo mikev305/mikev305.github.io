@@ -1,54 +1,301 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - Portfolio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+            --background-color: #f4f4f4;
+            --text-color: #333;
+        }
 
-export default function Portfolio() {
-  const projects = [
-    { title: "Project 1", description: "A cool web project coming soon..." },
-    { title: "Project 2", description: "Another amazing project in the works..." },
-    { title: "Project 3", description: "Yet another exciting project in development..." },
-    { title: "Project 4", description: "An innovative concept coming soon..." },
-    { title: "Project 5", description: "Stay tuned for this masterpiece..." },
-    { title: "Project 6", description: "A web solution that's in the making..." },
-  ];
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  return (
-    <div className="min-h-screen bg-gray-900 text-white p-6 relative overflow-hidden flex flex-col items-center">
-      {/* Animated Background */}
-      <motion.div
-        className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 opacity-30 blur-3xl"
-        animate={{ scale: [1, 1.5, 1] }}
-        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-      />
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
 
-      <header className="text-center py-12 relative z-10 max-w-3xl">
-        <h1 className="text-5xl font-extrabold tracking-tight">My Portfolio</h1>
-        <p className="text-gray-300 text-lg mt-2">A showcase of my web development projects</p>
-      </header>
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
 
-      <section className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 px-6 relative z-10 w-full max-w-6xl">
-        {projects.map((project, index) => (
-          <motion.div
-            key={index}
-            whileHover={{ scale: 1.08 }}
-            whileTap={{ scale: 0.95 }}
-            className="bg-gray-800 rounded-3xl shadow-2xl shadow-gray-700 overflow-hidden transition-transform hover:shadow-purple-600 hover:shadow-xl"
-          >
-            <Card className="p-6">
-              <CardContent>
-                <h2 className="text-2xl font-bold text-white">{project.title}</h2>
-                <p className="text-gray-400 mt-3 text-sm">{project.description}</p>
-                <Button 
-                  className="mt-6 w-full py-3 text-lg font-semibold transition-transform transform hover:scale-105 hover:bg-purple-500 hover:text-white"
-                  variant="outline"
-                >
-                  View Project
-                </Button>
-              </CardContent>
-            </Card>
-          </motion.div>
-        ))}
-      </section>
-    </div>
-  );
-}
+        header {
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        #hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+        }
+
+        .hero-content {
+            text-align: center;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: white;
+            color: var(--primary-color);
+            text-decoration: none;
+            border-radius: 5px;
+            transition: transform 0.3s ease;
+            font-weight: 600;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+        }
+
+        #projects {
+            background-color: white;
+            padding: 4rem 0;
+        }
+
+        #projects h2 {
+            font-weight: 700;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background-color: var(--background-color);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .project-card-content {
+            padding: 1rem;
+        }
+
+        .project-card-content h3 {
+            font-weight: 600;
+        }
+
+        #contact {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        #contact h2 {
+            font-weight: 700;
+        }
+
+        .contact-icons {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .contact-icons a {
+            color: white;
+            font-size: 2rem;
+            margin: 0 15px;
+            transition: color 0.3s ease;
+        }
+
+        .contact-icons a:hover {
+            color: var(--secondary-color);
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+            font-weight: 300;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar container">
+            <div class="logo">Your Name</div>
+            <ul class="nav-links">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="hero">
+        <div class="container hero-content">
+            <h1>Hello, I'm [Your Name]</h1>
+            <p>A passionate developer creating amazing digital experiences</p>
+            <a href="#projects" class="cta-button">View My Work</a>
+        </div>
+    </section>
+
+    <section id="projects" class="container">
+        <h2 style="text-align: center; margin-bottom: 2rem;">My Projects</h2>
+        <div class="projects-grid" id="projectsContainer">
+            <!-- Projects will be dynamically added here -->
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2>Let's Connect</h2>
+            <p>Feel free to reach out for collaborations or just to say hello!</p>
+            <div class="contact-icons">
+                <a href="#" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Your Name. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Dynamic Project Management
+        const projects = [
+            {
+                title: 'Project 1',
+                description: 'A brief description of your first project',
+                image: '/api/placeholder/350/200',
+                link: '#'
+            },
+            {
+                title: 'Project 2',
+                description: 'Details about your second project',
+                image: '/api/placeholder/350/200',
+                link: '#'
+            },
+            {
+                title: 'Project 3',
+                description: 'Highlights of your third project',
+                image: '/api/placeholder/350/200',
+                link: '#'
+            }
+        ];
+
+        function renderProjects() {
+            const projectsContainer = document.getElementById('projectsContainer');
+            projectsContainer.innerHTML = projects.map(project => `
+                <div class="project-card">
+                    <img src="${project.image}" alt="${project.title}">
+                    <div class="project-card-content">
+                        <h3>${project.title}</h3>
+                        <p>${project.description}</p>
+                        <a href="${project.link}" class="cta-button" style="margin-top: 10px; padding: 5px 10px; font-size: 0.9rem;">View Project</a>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Render projects on page load
+        renderProjects();
+    </script>
+</body>
+</html>
